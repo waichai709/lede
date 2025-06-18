@@ -63,7 +63,44 @@ jobs:
           ./scripts/feeds install -a
 
       - name: Generate configuration file
-        run: make defconfig
+        run: |
+          rm -f ./.config*
+          touch ./.config
+          cat >> .config <<EOF
+          #
+          # ========================固件定制部分========================
+          #
+          # 示例配置，下面是 diff.config 文件中的内容
+          CONFIG_TARGET_mediatek=y
+          CONFIG_TARGET_mediatek_filogic=y
+          CONFIG_TARGET_mediatek_filogic_DEVICE_netcore_n60-pro=y
+          # CONFIG_PACKAGE_TURBOACC_INCLUDE_BBR_CCA is not set
+          # CONFIG_PACKAGE_etherwake is not set
+          # CONFIG_PACKAGE_kmod-nf-conntrack-netlink is not set
+          # CONFIG_PACKAGE_kmod-tcp-bbr is not set
+          CONFIG_PACKAGE_libwolfssl=y
+          # CONFIG_PACKAGE_luci-app-accesscontrol is not set
+          # CONFIG_PACKAGE_luci-app-autoreboot is not set
+          # CONFIG_PACKAGE_luci-app-filetransfer is not set
+          # CONFIG_PACKAGE_luci-app-nlbwmon is not set
+          # CONFIG_PACKAGE_luci-app-vlmcsd is not set
+          # CONFIG_PACKAGE_luci-app-vsftpd is not set
+          # CONFIG_PACKAGE_luci-app-wol is not set
+          # CONFIG_PACKAGE_luci-lib-fs is not set
+          CONFIG_PACKAGE_luci-theme-argon=y
+          # CONFIG_PACKAGE_nlbwmon is not set
+          # CONFIG_PACKAGE_vlmcsd is not set
+          # CONFIG_PACKAGE_vsftpd-alt is not set
+          # CONFIG_PACKAGE_wpad-openssl is not set
+          CONFIG_PACKAGE_wpad-wolfssl=y
+          CONFIG_WOLFSSL_HAS_NO_HW=y
+          CONFIG_WPA_WOLFSSL=y
+          #
+          # ========================固件定制部分结束========================
+          #
+          EOF
+          sed -i 's/^[ \t]*//g' ./.config
+          make defconfig
 
       - name: Download packages
         run: make download -j16
