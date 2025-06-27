@@ -73,7 +73,7 @@ jobs:
           # 示例配置，下面是 diff.config 文件中的内容
           CONFIG_TARGET_mediatek=y
           CONFIG_TARGET_mediatek_filogic=y
-          CONFIG_TARGET_mediatek_filogic_DEVICE_xiaomi_mi-router-wr30u=y
+          CONFIG_TARGET_mediatek_filogic_DEVICE_netcore_n60-pro=y
           # CONFIG_PACKAGE_TURBOACC_INCLUDE_BBR_CCA is not set
           # CONFIG_PACKAGE_etherwake is not set
           # CONFIG_PACKAGE_kmod-nf-conntrack-netlink is not set
