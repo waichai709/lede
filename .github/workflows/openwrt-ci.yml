@@ -9,7 +9,7 @@ name: OpenWrt-CI
 
 on:
   schedule:
-      ##- cron: 0 20 * * *
+    - cron: 0 20 * * *
 
 permissions:
   contents: read
@@ -74,8 +74,10 @@ jobs:
           CONFIG_TARGET_mediatek=y
           CONFIG_TARGET_mediatek_filogic=y
           CONFIG_TARGET_mediatek_filogic_DEVICE_netcore_n60-pro=y
+          # CONFIG_PACKAGE_TURBOACC_INCLUDE_BBR_CCA is not set
           # CONFIG_PACKAGE_etherwake is not set
           # CONFIG_PACKAGE_kmod-nf-conntrack-netlink is not set
+          # CONFIG_PACKAGE_kmod-tcp-bbr is not set
           CONFIG_PACKAGE_libwolfssl=y
           # CONFIG_PACKAGE_luci-app-accesscontrol is not set
           # CONFIG_PACKAGE_luci-app-autoreboot is not set
